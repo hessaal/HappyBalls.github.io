@@ -2,8 +2,8 @@ var canvas = document.querySelector("canvas");
 var ctx = canvas.getContext("2d");
 var balls =[];
 var ball = 0 ;
-canvas.width =document.body.clientWidth;
-canvas.height = 600;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 function random(max , min) {
   var num = Math.floor(Math.random() * (max - min) + min) ;
   return num;
@@ -14,15 +14,13 @@ function mouse(x,y){
   this.dy = y;}
 var mousePos = new mouse(0,0);
 
-// function getMousePos(canvas, evt) {
-// var rect = canvas.getBoundingClientRect();
-// mousePos.x = evt.clientX - rect.left ;
-// mousePos.y = evt.clientY - rect.top;
-// return mousePos;
-// }
+canvas.addEventListener('touchmove', function(evt) {
+mousePos.dx = event.touches[0].clientX;
+mousePos.dy = event.touches[0].clientY;
+});
 
 canvas.addEventListener('mousemove', function(evt) {
-// mousePos = getMousePos(canvas, evt);
+// mousePos = getMousePos(canvas, evt); 
 mousePos.dx = evt.clientX;
 mousePos.dy = evt.clientY;
 });
