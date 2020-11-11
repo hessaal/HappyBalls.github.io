@@ -19,6 +19,11 @@ mousePos.dx = event.touches[0].clientX;
 mousePos.dy = event.touches[0].clientY;
 });
 
+canvas.addEventListener('touchend', function(evt) {
+mousePos.dx = 0;
+mousePos.dy = 0;
+});
+
 canvas.addEventListener('mousemove', function(evt) {
 // mousePos = getMousePos(canvas, evt); 
 mousePos.dx = evt.clientX;
