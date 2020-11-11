@@ -14,18 +14,17 @@ function mouse(x,y){
   this.dy = y;}
 var mousePos = new mouse(0,0);
 
-canvas.addEventListener('touchstart', function(evt) {
-mousePos.dx = event.touches[0].clientX;
-mousePos.dy = event.touches[0].clientY;
+canvas.addEventListener('touchmove', function(evt) {
+mousePos.dx = evt.touches[0].clientX;
+mousePos.dy = evt.touches[0].clientY;
 });
 
-canvas.addEventListener('touchend', function(evt) {
+canvas.addEventListener('touchend', function() {
 mousePos.dx = 0;
 mousePos.dy = 0;
 });
 
 canvas.addEventListener('mousemove', function(evt) {
-// mousePos = getMousePos(canvas, evt); 
 mousePos.dx = evt.clientX;
 mousePos.dy = evt.clientY;
 });
