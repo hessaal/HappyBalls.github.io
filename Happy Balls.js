@@ -14,7 +14,7 @@ function mouse(x,y){
   this.dy = y;}
 var mousePos = new mouse(0,0);
 
-canvas.addEventListener('touchmove', function(evt) {
+canvas.addEventListener('touchstart', function(evt) {
 mousePos.dx = event.touches[0].clientX;
 mousePos.dy = event.touches[0].clientY;
 });
