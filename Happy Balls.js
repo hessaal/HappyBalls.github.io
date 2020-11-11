@@ -17,12 +17,13 @@ var mousePos = new mouse(0,0);
 canvas.addEventListener('touchstart', function(evt) {
 mousePos.dx = evt.touches[0].clientX;
 mousePos.dy = evt.touches[0].clientY;
-evt. preventDefault
+evt.preventDefault
 });
 
 canvas.addEventListener('touchmove', function(evt) {
 mousePos.dx = evt.touches[0].clientX;
 mousePos.dy = evt.touches[0].clientY;
+evt.preventDefault
 });
 
 canvas.addEventListener('touchend', function() {
