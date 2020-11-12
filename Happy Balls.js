@@ -31,10 +31,10 @@ mousePos.dx = 0;
 mousePos.dy = 0;
 });
 
-canvas.addEventListener('mousemove', function(evt) {
-mousePos.dx = evt.clientX;
-mousePos.dy = evt.clientY;
-});
+//canvas.addEventListener('mousemove', function(evt) {
+//mousePos.dx = evt.clientX;
+//mousePos.dy = evt.clientY;
+//});
 
 function Ball(){
   this.dx = random(2,0);
