@@ -2,44 +2,88 @@ var canvas = document.querySelector("canvas");
 var ctx = canvas.getContext("2d");
 var balls =[];
 var ball = 0 ;
-canvas.width = window.innerWidth;
+var mySound;
+var istouch = false;
+var ismouse = false;
+canvas.width =window.innerWidth;
 canvas.height = window.innerHeight;
+
+
 function random(max , min) {
   var num = Math.floor(Math.random() * (max - min) + min) ;
   return num;
 }
 
+
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play( );
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }    
+}
 function mouse(x,y){
   this.dx = x;
   this.dy = y;}
 var mousePos = new mouse(0,0);
 
-canvas.addEventListener('touchstart', function(evt) {
-mousePos.dx = evt.touches[0].clientX;
-mousePos.dy = evt.touches[0].clientY;
-evt.preventDefault
+canvas.addEventListener("touchstart", function(evt){
+  istouch=true;
+  ismouse = false;
+ mousePos.dx = evt.touches[0].clientX;
+ mousePos.dy = evt.touches[0].clientY;
+ console.log("in touch move  " + mousePos.dx );
 });
 
-canvas.addEventListener('touchmove', function(evt) {
-mousePos.dx = evt.touches[0].clientX;
-mousePos.dy = evt.touches[0].clientY;
-evt.preventDefault
+canvas.addEventListener("touchmove", function(evt){
+ istouch=true;
+ ismouse = false;
+ mousePos.dx = evt.touches[0].clientX;
+ mousePos.dy = evt.touches[0].clientY;
+ console.log("in touch move  " + mousePos.dx );
 });
 
-canvas.addEventListener('touchend', function() {
+
+canvas.addEventListener("touchend", function(evt){
+ mousePos.dx = 0;
+ mousePos.dy = 0;
+ console.log("in touch end  " + mousePos.dx );
+});
+
+canvas.addEventListener('mousemove', function(evt) {
+if (istouch){
+  evt.preventDefault();
+  istouch = false;
+  ismouse = true;
+}
+else{
+mousePos.dx = evt.clientX;
+mousePos.dy = evt.clientY;
+}
+
+});
+
+canvas.addEventListener('mouseout', function(evt) {
+  if (istouch){
+  evt.preventDefault();
+  istouch = false;
+  ismouse = true;
+}
 mousePos.dx = 0;
 mousePos.dy = 0;
 });
 
-//canvas.addEventListener('mousemove', function(evt) {
-//mousePos.dx = evt.clientX;
-//mousePos.dy = evt.clientY;
-//});
-
 function Ball(){
-  this.dx = random(2,0);
-  this.dy = random(6,4);
-  this.size = random(50,10);
+  this.dx = random(6,0);
+  this.dy = random(8,2);
+  this.size = random(60,10);
   var maxWidth = canvas.width - this.size;
   var maxHight = canvas.height - this.size;
   this.bx = random(maxWidth,this.size+1); 
@@ -91,14 +135,19 @@ if (mousePos.dy <= (this.by + this.size) &&  mousePos.dy >= (this.by - this.size
 };
 }
 
-for (var i = 0 ; i < 50 ; i++){
+for (var i = 0 ; i < 70 ; i++){
 	balls[i] = new Ball();
 }
+mySound = new sound("https://www.wavsource.com/snds_2020-10-01_3728627494378403/sfx/boing2.wav");
+
 
 function start(){
+canvas.width =window.innerWidth;
+canvas.height = window.innerHeight;
 ctx.clearRect(0, 0, canvas.width, canvas.height);
-for (var i = 0 ; i < 50 ; i++){
+for (var i = 0 ; i < 70 ; i++){
 	if (balls[i].bigger()) {
+  mySound.play();
 	balls[i].drawbigger();
 }else
 	balls[i].moveball();
@@ -106,22 +155,5 @@ for (var i = 0 ; i < 50 ; i++){
  window.requestAnimationFrame(start);	
 }
 
-
-// function biggerstart(){
-// ctx.clearRect(0, 0, canvas.width, canvas.height);
-// for (var i = 0 ; i < 2 ; i++){
-// if (i == ball){
-// balls[i].drawbigger();
-// }
-// else {
-// 	balls[i].moveball();
-// }
-// if (balls[i].bigger()) {
-// 	ball = i;
-// 	window.requestAnimationFrame(biggerstart);
-// // }
-// }
-//  window.requestAnimationFrame(start);	
-// }
-
  window.requestAnimationFrame(start);	
+
