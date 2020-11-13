@@ -138,7 +138,7 @@ if (mousePos.dy <= (this.by + this.size) &&  mousePos.dy >= (this.by - this.size
 for (var i = 0 ; i < 70 ; i++){
 	balls[i] = new Ball();
 }
-mySound = new sound("https://www.wavsource.com/snds_2020-10-01_3728627494378403/sfx/boing2.wav");
+mySound = new sound("boing2.wav");
 
 
 function start(){
