@@ -138,7 +138,7 @@ if (mousePos.dy <= (this.by + this.size) &&  mousePos.dy >= (this.by - this.size
 for (var i = 0 ; i < 70 ; i++){
 	balls[i] = new Ball();
 }
-mySound = new sound("boing2.wav");
+mySound = new sound("https://raw.githubusercontent.com/hessaal/HappyCircles.github.io/main/boing2.wav");
 
 
 function start(){
